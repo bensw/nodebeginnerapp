@@ -1,0 +1,1 @@
+This is a test node application that I've created based on [The Node Beginner Book](http://nodebeginner.org)
