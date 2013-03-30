@@ -1,8 +1,20 @@
 var http = require("http");
+var url = require("url");
 
+function start(route){
+	function onRequest(request, response) {
+		var pathname = url.parse(request.url).pathname;
+		console.log("Request for " + pathname + " received.");
 
-http.createServer(function(request, response) {
-	response.writeHead(200, {"Content-Type": "text/plain"});
-	response.write("Hello World");
-	response.end();
-}).listen(8888);
+		route(pathname);
+
+		response.writeHead(200, {"Content-Type": "text/plain"});
+		response.write("Hello World");
+		response.end();
+	}
+
+	http.createServer(onRequest).listen(8888);
+	console.log("server has started.");
+}
+// When required by another file make obj.start() = start()
+exports.start = start;
